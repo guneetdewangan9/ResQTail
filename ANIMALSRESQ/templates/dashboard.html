@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard – ResQTail</title>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('new_report', function (data) {
+      alert("🚨 New animal reported:\n" + data.description);
+    });
+  </script>
+</head>
+<body>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li style="color: green;">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <h2>Welcome, {{ session.name }}!</h2>
+  <a href="/report">➕ Report Injured Animal</a> | 
+  <a href="/logout">Logout</a>
+  <hr>
+
+  <h3>Reported Animals</h3>
+  {% for r in reports %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+      <p><b>Description:</b> {{ r[2] }}</p>
+      <img src="{{ r[3] }}" alt="Animal Image" width="200"><br>
+      <p><b>Status:</b> {{ r[6] }}</p>
+      <p><b>Location:</b> <a href="https://www.google.com/maps?q={{ r[4] }},{{ r[5] }}" target="_blank">View Map</a></p>
+
+      {% if role == 'Volunteer' and r[6] == 'Pending' %}
+        <a href="/mark_cared/{{ r[0] }}">✅ Mark as Cared</a>
+      {% endif %}
+
+      {% if role == 'User' and r[1] == session.user_id %}
+        <a href="/delete_report/{{ r[0] }}" onclick="return confirm('Are you sure you want to delete this report?');">🗑️ Delete Report</a>
+      {% endif %}
+    </div>
+  {% endfor %}
+</body>
+</html>
+

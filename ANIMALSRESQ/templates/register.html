@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Register – ResQTail</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <h2>Create Account</h2>
+  <form method="POST">
+    <input name="name" placeholder="Name" required><br>
+    <input type="email" name="email" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <select name="role" required>
+      <option value="User">User</option>
+      <option value="Volunteer">Volunteer</option>
+    </select><br>
+    <button type="submit">Register</button>
+  </form>
+  <p>Already have an account? <a href="/login">Login</a></p>
+</body>
+</html>

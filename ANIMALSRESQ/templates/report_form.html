@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Report Injured Animal – ResQTail</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+  <h2>Report Injured Animal</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <p style="color: green;">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" enctype="multipart/form-data" id="reportForm">
+    <textarea name="description and location" placeholder="Describe the animal and its condition, also mention its location" required></textarea><br>
+    <input type="file" name="image" accept="image/*" required><br>
+    <input type="hidden" name="lat" id="lat">
+    <input type="hidden" name="lon" id="lon">
+    <button type="submit">Submit Report</button>
+  </form>
+
+  <a href="/dashboard">⬅ Back to Dashboard</a>
+
+  <script>
+    document.getElementById("reportForm").addEventListener("submit", function (e) {
+      e.preventDefault();  // Prevent default submit
+      navigator.geolocation.getCurrentPosition(function (position) {
+        document.getElementById("lat").value = position.coords.latitude;
+        document.getElementById("lon").value = position.coords.longitude;
+        e.target.submit(); // Submit only after location is set
+      }, function (error) {
+        alert("❌ Unable to fetch location. Please allow location access.");
+      });
+    });
+  </script>
+</body>
+</html>
+

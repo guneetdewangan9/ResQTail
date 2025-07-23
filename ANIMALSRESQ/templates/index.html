@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ResQTail – Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+
+  <style>
+    .center-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      text-align: center;
+    }
+
+    .center-container a {
+      margin: 10px;
+      font-size: 18px;
+    }
+
+    .center-container h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .center-container p {
+      font-size: 18px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-container">
+    <h1>🐾 Welcome to ResQTail</h1>
+    <p>A platform to report and respond to injured animals in real-time.</p>
+    <a href="/login">🔐 Login</a>
+    <a href="/register">📝 Register</a>
+  </div>
+</body>
+</html>
+

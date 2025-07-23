@@ -1,0 +1,134 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body Styling */
+body {
+  background: #fefefe;
+  padding: 40px 20px;
+  color: #333;
+  background: linear-gradient(to right, #fefefe, #f0f8ff);
+}
+
+/* Headings */
+h1, h2, h3 {
+  text-align: center;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: #0077cc;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #0055a5;
+}
+
+/* Buttons */
+button {
+  padding: 10px 18px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Input Fields */
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  resize: vertical;
+}
+
+/* Dashboard Report Cards */
+.report-card {
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  margin: 20px auto;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.report-card:hover {
+  transform: scale(1.01);
+}
+
+.report-card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.report-card p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+/* Center Top Buttons */
+.top-buttons {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Flash Messages */
+.flash-message {
+  color: green;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Error Messages */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Back Link */
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 50px;
+  color: #888;
+  font-size: 14px;
+}

@@ -1,0 +1,7 @@
+Flask
+Flask-MySQLdb
+Flask-SocketIO
+Flask-Mail
+python-dotenv
+cloudinary
+eventlet
