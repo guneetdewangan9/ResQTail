@@ -1,22 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Register – ResQTail</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
   <h2>Create Account</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-messages-container">
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
   <form method="POST">
-    <input name="name" placeholder="Name" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="password" placeholder="Password" required><br>
-    <select name="role" required>
+    <input name="name" type="text" placeholder="Name" required aria-label="Name"><br>
+    <input type="email" name="email" placeholder="Email" required aria-label="Email"><br>
+    <input type="password" name="password" placeholder="Password" required aria-label="Password"><br>
+    <select name="role" required aria-label="Role">
+      <option value="" disabled selected>Select Role</option>
       <option value="User">User</option>
       <option value="Volunteer">Volunteer</option>
     </select><br>
-    <button type="submit">Register</button>
+    <button type="submit" class="btn btn-primary">Register</button>
   </form>
-  <p>Already have an account? <a href="/login">Login</a></p>
+  <p class="text-center mt-20">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
 </body>
 </html>
