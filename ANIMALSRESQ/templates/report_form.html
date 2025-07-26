@@ -1,43 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Report Injured Animal – ResQTail</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
   <h2>Report Injured Animal</h2>
 
   {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-      {% for category, message in messages %}
-        <p style="color: green;">{{ message }}</p>
-      {% endfor %}
+      <div class="flash-messages-container">
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
     {% endif %}
   {% endwith %}
 
   <form method="POST" enctype="multipart/form-data" id="reportForm">
-    <textarea name="description and location" placeholder="Describe the animal and its condition, also mention its location" required></textarea><br>
-    <input type="file" name="image" accept="image/*" required><br>
+    <textarea name="description" placeholder="Describe the animal and its condition, e.g., 'A stray dog with a broken leg near Central Park main gate.' " required aria-label="Description"></textarea>
+
+    <label for="image-upload" class="file-upload-label btn btn-primary">
+      <span>Choose Image</span>
+      <input type="file" name="image" id="image-upload" accept="image/*" required style="display: none;">
+    </label>
+    <p id="file-name" class="text-center" style="font-size: 0.9em; color: var(--light-text-color);">No file chosen</p>
+
     <input type="hidden" name="lat" id="lat">
     <input type="hidden" name="lon" id="lon">
-    <button type="submit">Submit Report</button>
+    <button type="submit" class="btn btn-primary">Submit Report</button>
   </form>
 
-  <a href="/dashboard">⬅ Back to Dashboard</a>
+  <p class="text-center mt-20"><a href="{{ url_for('dashboard') }}">⬅ Back to Dashboard</a></p>
 
   <script>
+    // Update file name display when a file is chosen
+    document.getElementById('image-upload').addEventListener('change', function() {
+        const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+        document.getElementById('file-name').textContent = fileName;
+    });
+
     document.getElementById("reportForm").addEventListener("submit", function (e) {
-      e.preventDefault();  // Prevent default submit
-      navigator.geolocation.getCurrentPosition(function (position) {
-        document.getElementById("lat").value = position.coords.latitude;
-        document.getElementById("lon").value = position.coords.longitude;
-        e.target.submit(); // Submit only after location is set
-      }, function (error) {
-        alert("❌ Unable to fetch location. Please allow location access.");
-      });
+      e.preventDefault();
+
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          document.getElementById("lat").value = position.coords.latitude;
+          document.getElementById("lon").value = position.coords.longitude;
+          e.target.submit();
+        }, function (error) {
+          let errorMessage = "❌ Unable to fetch location. Please allow location access.";
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = "❌ Location access denied. Please enable location services for this site.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = "❌ Location information is unavailable.";
+              break;
+            case error.TIMEOUT:
+              errorMessage = "❌ The request to get user location timed out.";
+              break;
+            case error.UNKNOWN_ERROR:
+              errorMessage = "❌ An unknown error occurred while trying to get your location.";
+              break;
+          }
+          alert(errorMessage);
+        });
+      } else {
+        alert("❌ Geolocation is not supported by your browser.");
+      }
     });
   </script>
 </body>
 </html>
-
