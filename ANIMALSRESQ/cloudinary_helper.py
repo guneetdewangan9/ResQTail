@@ -1,5 +1,3 @@
-# cloudinary_helper.py
-
 import cloudinary
 import cloudinary.uploader
 from config import Config
