@@ -235,4 +235,3 @@ def send_email(to, description, image_url, lat, lon):
         
 if __name__ == '__main__':
     socketio.run(app, debug=True)
-
