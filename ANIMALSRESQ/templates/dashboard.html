@@ -1,48 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Dashboard – ResQTail</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
   <script>
     const socket = io();
 
     socket.on('new_report', function (data) {
+      // Use a more subtle notification or a custom modal for better UX than alert
       alert("🚨 New animal reported:\n" + data.description);
     });
   </script>
 </head>
 <body>
-  {% with messages = get_flashed_messages() %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
-      <ul>
-        {% for message in messages %}
-          <li style="color: green;">{{ message }}</li>
+      <div class="flash-messages-container">
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">{{ message }}</div>
         {% endfor %}
-      </ul>
+      </div>
     {% endif %}
   {% endwith %}
 
   <h2>Welcome, {{ session.name }}!</h2>
-  <a href="/report">➕ Report Injured Animal</a> | 
-  <a href="/logout">Logout</a>
+  <div class="top-buttons">
+    <a href="{{ url_for('report') }}" class="btn btn-primary">➕ Report Injured Animal</a>
+    <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+  </div>
   <hr>
 
   <h3>Reported Animals</h3>
   {% for r in reports %}
-    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+    <div class="report-card">
       <p><b>Description:</b> {{ r[2] }}</p>
-      <img src="{{ r[3] }}" alt="Animal Image" width="200"><br>
-      <p><b>Status:</b> {{ r[6] }}</p>
-      <p><b>Location:</b> <a href="https://www.google.com/maps?q={{ r[4] }},{{ r[5] }}" target="_blank">View Map</a></p>
-
-      {% if role == 'Volunteer' and r[6] == 'Pending' %}
-        <a href="/mark_cared/{{ r[0] }}">✅ Mark as Cared</a>
+      {% if r[3] %}
+        <img src="{{ r[3] }}" alt="Animal Image"><br>
+      {% else %}
+        <p>No image available</p>
       {% endif %}
+      <p><b>Status:</b> <strong>{{ r[6] }}</strong></p>
+      <p><b>Location:</b> <a href="https://www.google.com/maps/search/?api=1&query={{ r[4] }},{{ r[5] }}" target="_blank">View on Map</a></p>
 
-      {% if role == 'User' and r[1] == session.user_id %}
-        <a href="/delete_report/{{ r[0] }}" onclick="return confirm('Are you sure you want to delete this report?');">🗑️ Delete Report</a>
-      {% endif %}
+      <div class="report-actions">
+        {% if role == 'Volunteer' and r[6] == 'Pending' %}
+          <a href="{{ url_for('mark_cared', report_id=r[0]) }}" class="btn btn-success">✅ Mark as Cared</a>
+        {% endif %}
+
+        {% if role == 'User' and r[1] == session.user_id %}
+          <a href="{{ url_for('delete_report', report_id=r[0]) }}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this report?');">🗑️ Delete Report</a>
+        {% endif %}
+      </div>
     </div>
+  {% else %}
+    <p class="text-center">No reports found yet. Be the first to report an animal in need!</p>
   {% endfor %}
 </body>
 </html>
