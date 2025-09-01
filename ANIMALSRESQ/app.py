@@ -1,5 +1,3 @@
-
-
 from flask import Flask, render_template, request, redirect, session, flash, url_for
 from flask_mysqldb import MySQL
 from flask_mail import Mail, Message
@@ -35,11 +33,11 @@ def register():
             existing_user = cursor.fetchone()
 
             if existing_user:
-                # If email exists, show warning
+                # Agar email pehle se hai, show warning
                 flash('That email address is already registered. Please use a different one or log in.', 'warning')
                 return redirect(url_for('register'))
 
-            # 2. If email is not there, then insert 
+            # 2. If email is not present there, then insert 
             cursor.execute("INSERT INTO users (name, email, password, role) VALUES (%s, %s, %s, %s)",
                            (name, email, password, role))
             mysql.connection.commit() # Commit
@@ -235,3 +233,4 @@ def send_email(to, description, image_url, lat, lon):
         
 if __name__ == '__main__':
     socketio.run(app, debug=True)
+
