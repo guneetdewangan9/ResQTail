@@ -9,7 +9,7 @@ class Config:
     MYSQL_DB = 'animalresqq'
     
     MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = 587
+    MAIL_PORT = 8000
     MAIL_USE_TLS = True
     MAIL_USERNAME = 'guneettestingproject'
     MAIL_PASSWORD = 'guneet@9#'
@@ -17,3 +17,4 @@ class Config:
     CLOUDINARY_CLOUD_NAME = 'dag6t0tnf'
     CLOUDINARY_API_KEY = '318699889635956'
     CLOUDINARY_API_SECRET = 'wezrOfHplo-uU73Zc0pMEmW5UGk'
+
