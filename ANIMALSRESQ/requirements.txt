@@ -1,11 +1,13 @@
-flask
-flask-mysqldb
-flask-socketio
-flask-mail
-python-dotenv
-cloudinary
-eventlet
-pymongo
+Flask
+Flask-MySQLdb
+Flask-Mail
+Flask-SocketIO
 gunicorn
+eventlet
+cloudinary
+werkzeug
+mysqlclient
+
+
 
 
