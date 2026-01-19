@@ -7,6 +7,8 @@ eventlet
 cloudinary
 werkzeug
 mysqlclient
+pymysql
+
 
 
 
