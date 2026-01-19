@@ -6,10 +6,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from cloudinary_helper import upload_image
 from config import Config
 import MySQLdb
-import pymysql
+
 
 # Ensure compatibility on Windows
-pymysql.install_as_MySQLdb()
+
 
 # ======================================================
 # 🚀 APP INITIALIZATION
@@ -280,6 +280,7 @@ def delete_report(report_id):
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=8000)
+
 
 
 
