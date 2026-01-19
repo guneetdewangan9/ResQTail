@@ -257,5 +257,7 @@ def delete_report(report_id):
     return redirect(url_for('dashboard'))
         
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    # host='0.0.0.0' is important for cloud deployment
+    socketio.run(app, debug=True, host='0.0.0.0', port=8000)
+
 
