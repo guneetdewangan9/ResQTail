@@ -7,6 +7,7 @@ class Config:
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'Cmca1cftzv@#'
     MYSQL_DB = 'animalresqq'
+    MYSQL_PORT = 3306
     
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
@@ -17,5 +18,6 @@ class Config:
     CLOUDINARY_CLOUD_NAME = 'dag6t0tnf'
     CLOUDINARY_API_KEY = '318699889635956'
     CLOUDINARY_API_SECRET = 'wezrOfHplo-uU73Zc0pMEmW5UGk'
+
 
 
