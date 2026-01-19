@@ -5,3 +5,5 @@ Flask-Mail
 python-dotenv
 cloudinary
 eventlet
+pymongo
+
