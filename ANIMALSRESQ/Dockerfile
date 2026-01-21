@@ -1,6 +1,7 @@
 FROM python:3.13-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TERM=xterm
 
 WORKDIR /app
 
