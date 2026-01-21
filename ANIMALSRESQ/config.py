@@ -5,7 +5,7 @@ class Config:
     
     MYSQL_HOST = '127.0.0.1'
     MYSQL_USER = 'root'
-    MYSQL_PASSWORD = 'Cmca1cftzv@#'
+    MYSQL_PASSWORD = '123456789'
     MYSQL_DB = 'animalresqq'
     MYSQL_PORT = 3306
     
@@ -18,6 +18,7 @@ class Config:
     CLOUDINARY_CLOUD_NAME = 'dag6t0tnf'
     CLOUDINARY_API_KEY = '318699889635956'
     CLOUDINARY_API_SECRET = 'wezrOfHplo-uU73Zc0pMEmW5UGk'
+
 
 
 
