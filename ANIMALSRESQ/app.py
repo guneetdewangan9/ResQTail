@@ -5,7 +5,7 @@ from flask_socketio import SocketIO
 from werkzeug.security import generate_password_hash, check_password_hash
 from cloudinary_helper import upload_image
 from config import Config
-import MySQLdb
+
 
 
 # Ensure compatibility on Windows
@@ -280,6 +280,7 @@ def delete_report(report_id):
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=8000)
+
 
 
 
