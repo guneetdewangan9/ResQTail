@@ -3,7 +3,7 @@ import os
 class Config:
     SECRET_KEY = 'secret123'
     
-    MYSQL_HOST = 'localhost'
+    MYSQL_HOST = '127.0.0.1'
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'Cmca1cftzv@#'
     MYSQL_DB = 'animalresqq'
@@ -18,6 +18,7 @@ class Config:
     CLOUDINARY_CLOUD_NAME = 'dag6t0tnf'
     CLOUDINARY_API_KEY = '318699889635956'
     CLOUDINARY_API_SECRET = 'wezrOfHplo-uU73Zc0pMEmW5UGk'
+
 
 
 
