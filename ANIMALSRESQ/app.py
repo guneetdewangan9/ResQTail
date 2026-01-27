@@ -8,12 +8,10 @@ from config import Config
 
 
 
-# Ensure compatibility on Windows
 
 
-# ======================================================
-# 🚀 APP INITIALIZATION
-# ======================================================
+
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -24,9 +22,7 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 print("✅ App & Extensions Initialized Successfully")
 
-# ======================================================
-# 📩 HELPER FUNCTION: SEND EMAIL
-# ======================================================
+
 
 def send_email(to, description, image_url, lat, lon):
     try:
@@ -50,9 +46,9 @@ def send_email(to, description, image_url, lat, lon):
     except Exception as e:
         print(f"❌ Email Error: {e}")
 
-# ======================================================
-# 🌐 ROUTES
-# ======================================================
+
+
+
 
 @app.route('/')
 def index():
@@ -93,7 +89,7 @@ def register():
 
     return render_template('register.html')
 
-# ---------------- LOGIN ----------------
+# ------ LOGIN --
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -274,12 +270,13 @@ def delete_report(report_id):
 
     return redirect(url_for('dashboard'))
 
-# ======================================================
-# ▶️ RUN APP
-# ======================================================
+
+
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=8000)
+
 
 
 
